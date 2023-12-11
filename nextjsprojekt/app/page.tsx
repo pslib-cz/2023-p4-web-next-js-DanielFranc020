@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import InventoryForm from './components/InventoryForm';
 
 interface InventoryItem {
-  itemName: string;
+  itemName: string; 
   quantity: number;
 }
 

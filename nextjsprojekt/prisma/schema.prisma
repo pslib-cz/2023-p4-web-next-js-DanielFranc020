@@ -1,17 +1,18 @@
-// prisma/schema.prisma
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/client"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-// prisma/schema.prisma
-model InventoryItem {
-  id       Int      @id @default(autoincrement())
-  itemName String
-  quantity Int
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
 }
