@@ -1,21 +1,16 @@
 // components/InventoryForm.tsx
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
-interface InventoryItem {
-  itemName: string;
-  quantity: number;
-}
-
+import InventoryItem from '../../models/InventoryItem';
 interface InventoryFormProps {
-  onSubmit: (item: InventoryItem) => void;
+  sendData: (item: InventoryItem) => void;
 }
 
-const InventoryForm: React.FC<InventoryFormProps> = ({ onSubmit }) => {
+const InventoryForm: React.FC<InventoryFormProps> = ({ sendData }) => {
   const { register, handleSubmit } = useForm<InventoryItem>();
 
   const handleFormSubmit = (data: InventoryItem) => {
-    onSubmit(data);
+    sendData(data);
   };
 
   return (
@@ -23,7 +18,7 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ onSubmit }) => {
       <label className="block mb-2">
         Item Name:
         <input
-          {...register('itemName', { required: true })}
+          {...register('name', { required: true })}
           className="w-full border p-2 rounded focus:outline-none focus:border-blue-500 text-black"
         />
       </label>
@@ -31,7 +26,14 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ onSubmit }) => {
         Quantity:
         <input
           type="number"
-          {...register('quantity', { required: true })}
+          {...register('count', { required: true })}
+          className="w-full border p-2 rounded focus:outline-none focus:border-blue-500 text-black"
+        />
+      </label>
+      <label className="block mb-2">
+        Serial number:
+        <input 
+          {...register('serial_number', { required: true })}
           className="w-full border p-2 rounded focus:outline-none focus:border-blue-500 text-black"
         />
       </label>
