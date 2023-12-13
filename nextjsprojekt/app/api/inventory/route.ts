@@ -2,7 +2,7 @@ import prisma from "../../../lib/prisma";
 
 export async function GET(req: Request, res: Response) {
   try {
-    const items = await prisma.InventoryItem.findMany({
+    const items = await prisma.inventoryItem.findMany({
       select: {
         id: true,
         serial_number: true,
@@ -50,7 +50,8 @@ export async function POST(req: Request, res: Response) {
         }
       );
     }
-    const user = await prisma.InventoryItem.create({
+    console.log(body);
+    const user = await prisma.inventoryItem.create({
       data: {
         name: body.name,
         serial_number: body.serial_number,
@@ -111,3 +112,4 @@ export async function POST(req: Request, res: Response) {
 //     );
 //   }
 // }
+//}

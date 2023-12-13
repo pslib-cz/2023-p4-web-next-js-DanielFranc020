@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import InventoryForm from './components/InventoryForm';
 import InventoryItem from '../models/InventoryItem';
 import InventoryList from './components/InventoryList';
@@ -8,7 +8,7 @@ import InventoryList from './components/InventoryList';
 
 export default function Home() 
 {
-    const [inventory, setInventory] = useState<InventoryItem[]>([]);
+    const [inventory, setInventory]: [InventoryItem[], Dispatch<SetStateAction<InventoryItem[]>>] = useState<InventoryItem[]>([]);
     const handleAddToInventory = async (item: InventoryItem) => {
         console.log(JSON.stringify(item))
         const response = await fetch('/api/inventory', {
@@ -29,7 +29,7 @@ export default function Home()
             <h1>Inventory manager</h1>
             <h2>The best app for managing your company's inventory ever</h2>
             <InventoryForm sendData={handleAddToInventory}/>
-            <InventoryList/>
+            <InventoryList data={inventory} setData={setInventory} />
         </div>
     )
 }

@@ -10,6 +10,7 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ sendData }) => {
   const { register, handleSubmit } = useForm<InventoryItem>();
 
   const handleFormSubmit = (data: InventoryItem) => {
+    console.log(data)
     sendData(data);
   };
 
@@ -26,7 +27,7 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ sendData }) => {
         Quantity:
         <input
           type="number"
-          {...register('count', { required: true })}
+          {...register('count', { required: true, valueAsNumber: true })}
           className="w-full border p-2 rounded focus:outline-none focus:border-blue-500 text-black"
         />
       </label>
