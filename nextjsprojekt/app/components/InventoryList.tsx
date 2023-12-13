@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import InventoryItem from "../../models/InventoryItem";
+import Link from "next/link";
 
 interface InventoryListProps {
     data: InventoryItem[],
@@ -36,7 +37,7 @@ export default function InventoryList({ data, setData }: InventoryListProps)
     return ( 
         <ul>  
 
-            {data.map((val, i) => <li key={i}>{val.name} <button key={i} onClick={() => deleteItem(val.id)}>SMAZAT</button></li>)}
+            {data.map((val, i) => <li key={i}>{val.name} <Link href={`/inventory/${val.id}`}>ZOBRAZ VICE</Link><button key={i} onClick={() => deleteItem(val.id)}>SMAZAT</button></li>)}
 
         </ul>
     )
