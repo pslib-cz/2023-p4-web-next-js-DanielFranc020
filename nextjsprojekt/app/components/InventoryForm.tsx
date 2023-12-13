@@ -10,7 +10,6 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ sendData }) => {
   const { register, handleSubmit } = useForm<InventoryItem>();
 
   const handleFormSubmit = (data: InventoryItem) => {
-    console.log(data)
     sendData(data);
   };
 

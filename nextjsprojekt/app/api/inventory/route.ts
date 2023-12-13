@@ -80,36 +80,35 @@ export async function POST(req: Request, res: Response) {
   }
 }
 
-// export async function DELETE(req: Request, res: Response) {
-//   try {
-//     const body = await req.json()
-//     const device = await prisma.device.delete({
-//       where: { id: body.id}
-//     });
-//     return new Response(
-//       JSON.stringify({
-//         message: "Device deleted: " + body.id,
-//       }),
-//       {
-//         status: 200,
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//   }
-//   catch {
-//     return new Response(
-//       JSON.stringify({
-//         message: "Internal Server Error",
-//       }),
-//       {
-//         status: 500,
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//   }
-// }
-//}
+export async function DELETE(req: Request, res: Response) {
+  try {
+    const body = await req.json()
+    const inventoryItem = await prisma.inventoryItem.delete({
+      where: { id: body.id}
+    });
+    return new Response(
+      JSON.stringify({
+        id: body.id,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+  catch(e) {
+    return new Response(
+      JSON.stringify({
+        message: "Internal Server Error",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+}
