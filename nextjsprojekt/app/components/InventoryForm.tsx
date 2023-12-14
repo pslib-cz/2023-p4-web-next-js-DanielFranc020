@@ -16,7 +16,7 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ sendData }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(handleFormSubmit)} className="mt-2 p-4 rounded shadow-md text-center" style={{backgroundColor: "#343030"}}>
+    <Form onSubmit={handleSubmit(handleFormSubmit)} className="p-4 rounded shadow-md text-center" style={{backgroundColor: "#343030"}}>
       <FormGroup>
       <Label className="block mb-2" style={{color: "#ffffff", width: "80%"}}>
         Item Name: 

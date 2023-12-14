@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import InventoryItem from "../../models/InventoryItem";
 import Link from "next/link";
+import { Container, List, Row, ListGroupItem, Spinner, Button } from "reactstrap";
 
 interface InventoryListProps {
     data: InventoryItem[],
@@ -9,12 +10,15 @@ interface InventoryListProps {
 
 export default function InventoryList({ data, setData }: InventoryListProps) 
 {
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
+      setIsLoading(true);
         fetch('/api/inventory')
           .then((response) => response.json())
           .then((data) => {
             setData(data)
             console.log(data);
+            setIsLoading(false)
           });
       }, []);
       
@@ -35,10 +39,16 @@ export default function InventoryList({ data, setData }: InventoryListProps)
     }
     
     return ( 
-        <ul>  
+      <List className="mt-4 mb-4 text-center rounded" style={{backgroundColor: "#343030" }}>
+        <ListGroupItem className="text-center"><h1 style={{color: "white"}}>Items</h1></ListGroupItem>
+        {data.map((val, i) => <Row className="mb-2"><Container key={i} style={{color: "white", fontWeight: "bold"}}>{val.name} <Link href={`/inventory/${val.id}`} style={{color: "white", textDecoration: "none", padding: "10px", left: "0", fontWeight: "normal"}} color="primary">ZOBRAZ VICE</Link><Button key={i} onClick={() => deleteItem(val.id)} className="" style={{}}>SMAZAT</Button></Container></Row>)}
+        {isLoading &&
+            <Spinner className="mb-2"  color="white">
+            Loading...
+          </Spinner>
+        }
 
-            {data.map((val, i) => <li key={i}>{val.name} <Link href={`/inventory/${val.id}`}>ZOBRAZ VICE</Link><button key={i} onClick={() => deleteItem(val.id)}>SMAZAT</button></li>)}
+      </List>
 
-        </ul>
     )
 }
